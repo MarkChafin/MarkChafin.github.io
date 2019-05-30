@@ -1,5 +1,5 @@
 let game;
-// git test 
+
 // global game options
 let gameOptions = {
     platformStartSpeed: 350,
