@@ -8,7 +8,7 @@ let gameOptions = {
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
-    jumps: 2
+    jumps: 3
 }
  
 window.onload = function() {
