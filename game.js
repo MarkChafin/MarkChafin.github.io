@@ -1,6 +1,5 @@
 let game;
 
-
 var localStorageName = "crackalien";
 var highscore = localStorage.getItem(localStorageName) == null ? 0 : localStorage.getItem(localStorageName);
  
