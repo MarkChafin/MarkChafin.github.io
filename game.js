@@ -1,5 +1,8 @@
 let game;
 
+var localStorageName = "crackalien";
+var highscore = localStorage.getItem(localStorageName) == null ? 0 : localStorage.getItem(localStorageName);
+ 
 // global game options
 let gameOptions = {
     platformStartSpeed: 350,
@@ -8,7 +11,9 @@ let gameOptions = {
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
-    jumps: 3
+    jumps: 2,
+    score: 0,
+    highscore: highscore
 }
  
 window.onload = function() {
@@ -76,6 +81,17 @@ class playGame extends Phaser.Scene{
  
         // checking for input
         this.input.on("pointerdown", this.jump, this);
+        gameOptions.score = 0;
+
+        gameOptions.scoreText = this.add.text(10, 10, 'Score: 0', { fontSize: '25px', fill: '#FFFFFF' });
+        gameOptions.highscoreText = this.add.text(295, 10, 'High Score: 0', { fontSize: '25px', fill: '#FFFFFF' });
+
+        const bugGenLoop = this.time.addEvent({
+            delay: 100,
+            callback: addScore,
+            callbackScope: this,
+            loop: true,
+          });
     }
  
     // the core of the script: platform are added from the pool or created on the fly
@@ -114,6 +130,13 @@ class playGame extends Phaser.Scene{
         if(this.player.y > game.config.height){
             this.scene.start("PlayGame");
         }
+
+        if (gameOptions.score > gameOptions.highscore){
+          gameOptions.highscore = gameOptions.score ;
+          localStorage.setItem(localStorageName, gameOptions.highscore);
+        }
+        else{ null }
+        gameOptions.highscoreText.setText(`High Score: ${gameOptions.highscore}`);
         this.player.x = gameOptions.playerStartPosition;
  
         // recycling platforms
@@ -149,3 +172,8 @@ function resize(){
         canvas.style.height = windowHeight + "px";
     }
 }
+
+function addScore(){
+        gameOptions.score += 1;
+        gameOptions.scoreText.setText(`Score: ${gameOptions.score}`);
+    };
