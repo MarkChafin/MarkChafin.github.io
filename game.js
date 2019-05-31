@@ -13,6 +13,7 @@ let gameOptions = {
     playerStartPosition: 200,
     jumps: 2,
     score: 0,
+    lastRun:0,
     highscore: highscore
 }
  
@@ -84,7 +85,8 @@ class playGame extends Phaser.Scene{
         gameOptions.score = 0;
 
         gameOptions.scoreText = this.add.text(10, 10, 'Score: 0', { fontSize: '25px', fill: '#FFFFFF' });
-        gameOptions.highscoreText = this.add.text(295, 10, 'High Score: 0', { fontSize: '25px', fill: '#FFFFFF' });
+        gameOptions.lastRunText = this.add.text(1100, 10, `Last Run: ${gameOptions.lastRun}`, { fontSize: '25px', fill: '#FFFFFF' });
+        gameOptions.highscoreText = this.add.text(295, 10, `High Score: ${gameOptions.highscore}`, { fontSize: '25px', fill: '#FFFFFF' });
 
         const bugGenLoop = this.time.addEvent({
             delay: 100,
@@ -129,14 +131,17 @@ class playGame extends Phaser.Scene{
         // game over
         if(this.player.y > game.config.height){
             this.scene.start("PlayGame");
+            if (gameOptions.score > gameOptions.highscore){
+                gameOptions.highscore = gameOptions.score ;
+                localStorage.setItem(localStorageName, gameOptions.highscore);
+            }
+
+            gameOptions.highscoreText.setText(`High Score: ${gameOptions.highscore}`);
+            gameOptions.lastRun = gameOptions.score;
+            gameOptions.lastRunText.setText(`Last Run: ${gameOptions.lastRun}`);
+
         }
 
-        if (gameOptions.score > gameOptions.highscore){
-          gameOptions.highscore = gameOptions.score ;
-          localStorage.setItem(localStorageName, gameOptions.highscore);
-        }
-        else{ null }
-        gameOptions.highscoreText.setText(`High Score: ${gameOptions.highscore}`);
         this.player.x = gameOptions.playerStartPosition;
  
         // recycling platforms
