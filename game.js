@@ -11,13 +11,9 @@ let gameOptions = {
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
-<<<<<<< HEAD
     jumps: 3
-=======
-    jumps: 2,
     score: 0,
     highscore: highscore
->>>>>>> 1f218e7bb0d752e1cd45e445399692dd68dcfaac
 }
  
 window.onload = function() {
