@@ -47,9 +47,9 @@ class playGame extends Phaser.Scene{
         this.load.image("platform", "platform.png");
  
         // player is a sprite sheet made by 24x48 pixels
-        this.load.spritesheet("player", "kenney_platformercharacters/PNG/Soldier/soldier_tilesheet.png", {
-            frameWidth: 70,
-            frameHeight: 100
+        this.load.spritesheet("player", "kenney_platformercharacters/PNG/Soldier/soldier_runs.png", {
+            frameWidth: 84,
+            frameHeight: 106
         });
     }
     create(){
@@ -89,12 +89,12 @@ class playGame extends Phaser.Scene{
                 start: 0,
                 end: 1
             }),
-            frameRate: 8,
+            frameRate: 6,
             repeat: -1
         });
  
         // setting collisions between the player and the platform group
-        this.physics.add.collider(this.player, this.platformGroup);
+        this.physics.add.collider(this.player, this.platformGroup, function(){
             if(!this.player.anims.isPlaying){
                 this.player.anims.play("run");
             }
@@ -144,6 +144,8 @@ class playGame extends Phaser.Scene{
             }
             this.player.setVelocityY(gameOptions.jumpForce * -1);
             this.playerJumps ++;
+            // stops animation
+            this.player.anims.stop();
         }
     }
     update(){
