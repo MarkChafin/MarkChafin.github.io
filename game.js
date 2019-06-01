@@ -21,7 +21,7 @@ window.onload = function() {
  
     // object containing configuration options
     let gameConfig = {
-        type: Phaser.AUTO,
+        type: Phaser.canvas,
         width: 1334,
         height: 750,
         scene: playGame,
@@ -45,7 +45,12 @@ class playGame extends Phaser.Scene{
     }
     preload(){
         this.load.image("platform", "platform.png");
-        this.load.image("player", "player.png");
+ 
+        // player is a sprite sheet made by 24x48 pixels
+        this.load.spritesheet("player", "kenney_platformercharacters/PNG/Soldier/soldier_tilesheet.png", {
+            frameWidth: 70,
+            frameHeight: 100
+        });
     }
     create(){
  
