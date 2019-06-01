@@ -11,7 +11,7 @@ let gameOptions = {
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
-    jumps: 3
+    jumps: 3,
     score: 0,
     highscore: highscore
 }
