@@ -95,6 +95,10 @@ class playGame extends Phaser.Scene{
  
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
+            if(!this.player.anims.isPlaying){
+                this.player.anims.play("run");
+            }
+        }, null, this);
  
         // checking for input
         this.input.on("pointerdown", this.jump, this);
