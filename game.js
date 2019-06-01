@@ -81,6 +81,17 @@ class playGame extends Phaser.Scene{
         // adding the player;
         this.player = this.physics.add.sprite(gameOptions.playerStartPosition, game.config.height / 2, "player");
         this.player.setGravityY(gameOptions.playerGravity);
+
+        // setting player animation
+        this.anims.create({
+            key: "run",
+            frames: this.anims.generateFrameNumbers("player", {
+                start: 0,
+                end: 1
+            }),
+            frameRate: 8,
+            repeat: -1
+        });
  
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
