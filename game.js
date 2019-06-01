@@ -12,9 +12,8 @@ let gameOptions = {
     jumpForce: 400,
     playerStartPosition: 200,
 <<<<<<< HEAD
-    jumps: 3
 =======
-    jumps: 2,
+    jumps: 3,
     score: 0,
     lastRun:0,
     highscore: highscore
